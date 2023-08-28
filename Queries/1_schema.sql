@@ -10,10 +10,10 @@
 
 DROP TABLE IF EXISTS Course_Schedule;
 DROP TABLE IF EXISTS Enrollment;
+DROP TABLE IF EXISTS Teaches;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS Student;
 DROP TABLE IF EXISTS Program;
-DROP TABLE IF EXISTS Faculty;
 DROP TABLE IF EXISTS Teacher;
 DROP TABLE IF EXISTS Person;
 
@@ -42,40 +42,22 @@ create table Teacher
         constraint Teacher_FK_Person
       references Person(person_id)
       on update no action
-      on delete cascade,
+      on delete no action, -- Person entity can never be deleted (a teacher can come back to school after some time)
     degree VARCHAR(10),
     phone_number VARCHAR(20),
     website VARCHAR(255),
     office VARCHAR(20),
 );
 
--- Faculty
-CREATE TABLE Faculty
-(
-    faculty_id numeric(8,0)
-        constraint Faculty_PK primary key,
-    name VARCHAR(50) NOT NULL,
-    head_id numeric(8,0) -- Head Teacher (Dean) of the Faculty
-        constraint Faculty_FK_Head
-      references Teacher(teacher_id)
-      on update no action
-      on delete set null
-);
-
--- Program
+-- Study Program
 CREATE TABLE Program
 (
     program_id numeric(8,0)
         constraint Program_PK primary key,
     name VARCHAR(50) NOT NULL,
-    faculty_id numeric(8,0)
-        constraint Program_FK_Faculty
-      references Faculty(faculty_id)
-      on update no action
-      on delete set null,
     duration_years numeric(1,0) not null
         constraint Program_CHK_Duration
-      check (duration_years>=1 and duration_years<=6)
+      check (duration_years>=1)
 );
 
 -- Student
@@ -87,7 +69,7 @@ create table Student
         constraint Student_FK_Person
       references Person(person_id)
       on update no action
-      on delete cascade,
+      on delete no action, -- Person entity can never be deleted (a student can come back to school after some time)
     program_id numeric(8,0)
         constraint Student_FK_Program
       references Program(program_id)
@@ -96,7 +78,7 @@ create table Student
     study_year numeric(1,0) not null
         constraint Student_CHK_StudyYear
       check (study_year>0),
-    admission_date DATE NOT NULL,
+    admission_date DATE NOT NULL, -- Student is created when he/she is admitted
     graduation_date DATE,
     gpa decimal(4,2)
         constraint Student_CHK_GPA
@@ -121,22 +103,33 @@ create table Course
       check (credits>0), -- Credits are always positive number
     language VARCHAR(20),
     description VARCHAR(255),
-    faculty_id numeric(8,0)
-        constraint Course_FK_Faculty
-      references Faculty(faculty_id)
-      on update no action
-      on delete cascade, -- If faculty is deleted, all courses are deleted
     semester numeric(1,0) not null -- 0 is Winter Semester, 1 is Summer Semester
         constraint Course_CHK_Semester
       check (semester>=0 and semester<=1),
-    garant_id numeric(8,0) -- One and only one garant per course
+    garant_id numeric(8,0) -- One and only one garant per course (or null for archived courses)
         constraint Course_FK_Garant
       references Teacher(teacher_id)
       on update no action
-      on delete cascade, -- If teacher is deleted, all courses are deleted
+      on delete set null, -- for historical purposes
     max_capacity numeric(3,0) not null
         constraint Course_CHK_MaxCapacity
       check (max_capacity>0)
+);
+
+-- Teaches (many-to-many relationship between Teacher and Course)
+create table Teaches
+(
+    teacher_id numeric(8,0)
+        constraint Teaches_FK_Teacher
+      references Teacher(teacher_id)
+      on update no action
+      on delete no action, -- keep Teaches even if teacher (with certain ID) is deleted (for historical purposes or if teacher comes back)
+    course_id numeric(8,0)
+        constraint Teaches_FK_Course
+      references Course(course_id)
+      on update no action
+      on delete cascade, -- If a course is deleted, the historical data is irrelevant
+    primary key (teacher_id, course_id) -- Teacher can teach one course multiple times
 );
 
 -- Enrollments (many-to-many relationship between Student and Course)
@@ -146,12 +139,12 @@ create table Enrollment
         constraint Enrollment_FK_Student
       references Student(student_id)
       on update no action
-      on delete no action, -- keep enrollment even if student is deleted (for historical purposes)
+      on delete no action, -- keep enrollment (for historical purposes or if student comes back)
     course_id numeric(8,0)
         constraint Enrollment_FK_Course
       references Course(course_id)
       on update no action
-      on delete no action,
+      on delete no action, -- keep enrollment (for historical purposes, gpa calculation, etc.)
     enrollment_date DATE NOT NULL,
     grade numeric(1,0)
         constraint Enrollment_CHK_Grade

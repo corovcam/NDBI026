@@ -94,37 +94,24 @@ VALUES
 (10000024, 'MSc', '555-123-4588', 'www.example.com/white', 'Room 22V'),
 (10000025, 'PhD', '555-123-4589', 'www.example.com/harris', 'Room 23W');
 
--- Faculty
-INSERT INTO Faculty (faculty_id, name, head_id)
-VALUES
-(1, 'Medicine', 10000001),
-(2, 'Law', 10000002),
-(3, 'Arts', 10000005),
-(4, 'Natural Sciences', 10000006),
-(5, 'Education', 10000009),
-(6, 'Pharmacy', 10000010),
-(7, 'Physical Education and Sport', 10000013),
-(8, 'Mathematics, Physics and Informatics', 10000014),
-(9, 'Social and Economic Sciences', 10000017);
-
 -- Program
-INSERT INTO Program (program_id, name, faculty_id, duration_years)
+INSERT INTO Program (program_id, name, duration_years)
 VALUES
-(1, 'Medicine', 1, 6),
-(2, 'Law', 2, 5),
-(3, 'History', 3, 3),
-(4, 'Biology', 4, 3),
-(5, 'Chemistry', 4, 3),
-(6, 'Physics', 8, 3),
-(7, 'Mathematics', 8, 3),
-(8, 'Informatics', 8, 3),
-(9, 'Economics', 9, 3),
-(10, 'Pharmacy', 6, 5),
-(11, 'Education', 5, 3),
-(12, 'Physical Education', 7, 3),
-(13, 'Sport', 7, 3),
-(14, 'Economics', 9, 3),
-(15, 'Business Administration', 9, 3);
+(1, 'Medicine', 6),
+(2, 'Law', 5),
+(3, 'History', 3),
+(4, 'Biology', 3),
+(5, 'Chemistry', 3),
+(6, 'Physics', 3),
+(7, 'Mathematics', 3),
+(8, 'Informatics', 3),
+(9, 'Economics', 3),
+(10, 'Pharmacy', 5),
+(11, 'Education', 3),
+(12, 'Physical Education', 3),
+(13, 'Sport', 3),
+(14, 'Economics', 3),
+(15, 'Business Administration', 3);
 
 -- Student schema
 -- create table Student
@@ -195,64 +182,56 @@ VALUES
 (10000056, 7, 3, '2020-09-01', NULL, NULL, 'active', NULL),
 (10000057, 8, 3, '2020-09-01', NULL, NULL, 'active', NULL);
 
--- Course schema
--- create table Course
+INSERT INTO Course (course_id, name, credits, language, description, semester, garant_id, max_capacity)
+VALUES
+(1, 'Introduction to Programming', 5, 'English', 'Introduction to programming in C#', 0, 10000001, 10),
+(2, 'Introduction to Databases', 5, 'English', 'Introduction to databases in SQL', 0, 10000002, 30),
+(3, 'Introduction to Web', 5, 'English', 'Introduction to web development in ASP.NET', 1, 10000005, 30),
+(4, 'Introduction to Mobile', 5, 'English', 'Introduction to mobile development in Xamarin', 1, 10000006, 30),
+(5, 'Molecular Biology', 6, 'English', 'Introduction to molecular biology', 0, 10000009, 30),
+(6, 'Genetics', 6, 'English', 'Introduction to genetics', 0, 10000016, 30),
+(7, 'Biochemistry', 6, 'English', 'Introduction to biochemistry', 1, 10000017, 30),
+(8, 'Microbiology', 6, 'English', 'Introduction to microbiology', 1, 10000018, 30),
+(9, 'Introduction to Law', 6, 'English', 'Introduction to law', 0, 10000019, 30),
+(10, 'Introduction to Economics', 5, 'English', 'Introduction to economics', 0, 10000010, 30),
+(11, 'Introduction to Management', 5, 'English', 'Introduction to management', 1, 10000011, 30),
+(12, 'Introduction to Marketing', 5, 'English', 'Introduction to marketing', 1, 10000012, 30),
+(13, 'Introduction to Psychology', 5, 'English', 'Introduction to psychology', 0, 10000013, 30),
+(14, 'Introduction to Sociology', 3, 'English', 'Introduction to sociology', 0, 10000014, 30),
+(15, 'Introduction to Philosophy', 5, 'English', 'Introduction to philosophy', 1, 10000015, 30);
+
+-- Teaches (many-to-many relationship between Teacher and Course) schema
+-- create table Teaches
 -- (
---     course_id numeric(8,0)
---         constraint Course_PK
---       primary key,
---     name VARCHAR(50) not null,
---     credits numeric(2,0) not null
---         constraint Course_CHK_Credits
---       check (credits>0), -- Credits are always positive number
---     language VARCHAR(20),
---     description VARCHAR(255),
---     faculty_id numeric(8,0)
---         constraint Course_FK_Faculty
---       references Faculty(faculty_id)
---       on update no action
---       on delete cascade, -- If faculty is deleted, all courses are deleted
---     semester numeric(1,0) not null -- 0 is Winter Semester, 1 is Summer Semester
---         constraint Course_CHK_Semester
---       check (semester>=0 and semester<=1),
---     garant_id numeric(8,0) -- One and only one garant per course
---         constraint Course_FK_Garant
+--     teacher_id numeric(8,0)
+--         constraint Teaches_FK_Teacher
 --       references Teacher(teacher_id)
 --       on update no action
---       on delete cascade, -- If teacher is deleted, all courses are deleted
---     max_capacity numeric(3,0) not null
---         constraint Course_CHK_MaxCapacity
---       check (max_capacity>0)
+--       on delete no action, -- keep Teaches even if teacher (with certain ID) is deleted (for historical purposes or if teacher comes back)
+--     course_id numeric(8,0)
+--         constraint Teaches_FK_Course
+--       references Course(course_id)
+--       on update no action
+--       on delete cascade, -- If a course is deleted, the historical data is irrelevant
+--     primary key (teacher_id, course_id) -- Teacher can teach one course multiple times
 -- );
--- -- Faculty
--- INSERT INTO Faculty (faculty_id, name, head_id)
--- VALUES
--- (1, 'Medicine', 10000001),
--- (2, 'Law', 10000002),
--- (3, 'Arts', 10000005),
--- (4, 'Natural Sciences', 10000006),
--- (5, 'Education', 10000009),
--- (6, 'Pharmacy', 10000010),
--- (7, 'Physical Education and Sport', 10000013),
--- (8, 'Mathematics, Physics and Informatics', 10000014),
--- (9, 'Social and Economic Sciences', 10000017);
-INSERT INTO Course (course_id, name, credits, language, description, faculty_id, semester, garant_id, max_capacity)
+INSERT INTO Teaches (teacher_id, course_id)
 VALUES
-(1, 'Introduction to Programming', 5, 'English', 'Introduction to programming in C#', 8, 0, 10000001, 10),
-(2, 'Introduction to Databases', 5, 'English', 'Introduction to databases in SQL', 8, 0, 10000002, 30),
-(3, 'Introduction to Web', 5, 'English', 'Introduction to web development in ASP.NET', 8, 1, 10000005, 30),
-(4, 'Introduction to Mobile', 5, 'English', 'Introduction to mobile development in Xamarin', 8, 1, 10000006, 30),
-(5, 'Molecular Biology', 6, 'English', 'Introduction to molecular biology', 1, 0, 10000009, 30),
-(6, 'Genetics', 6, 'English', 'Introduction to genetics', 1, 0, 10000016, 30),
-(7, 'Biochemistry', 6, 'English', 'Introduction to biochemistry', 1, 1, 10000017, 30),
-(8, 'Microbiology', 6, 'English', 'Introduction to microbiology', 1, 1, 10000018, 30),
-(9, 'Introduction to Law', 6, 'English', 'Introduction to law', 2, 0, 10000019, 30),
-(10, 'Introduction to Economics', 5, 'English', 'Introduction to economics', 9, 0, 10000010, 30),
-(11, 'Introduction to Management', 5, 'English', 'Introduction to management', 9, 1, 10000011, 30),
-(12, 'Introduction to Marketing', 5, 'English', 'Introduction to marketing', 9, 1, 10000012, 30),
-(13, 'Introduction to Psychology', 5, 'English', 'Introduction to psychology', 4, 0, 10000013, 30),
-(14, 'Introduction to Sociology', 3, 'English', 'Introduction to sociology', 4, 0, 10000014, 30),
-(15, 'Introduction to Philosophy', 5, 'English', 'Introduction to philosophy', 4, 1, 10000015, 30);
+(10000001, 1),
+(10000002, 2),
+(10000005, 3),
+(10000006, 4),
+(10000009, 5),
+(10000016, 6),
+(10000017, 7),
+(10000018, 8),
+(10000019, 9),
+(10000010, 10),
+(10000011, 11),
+(10000012, 12),
+(10000013, 13),
+(10000014, 14),
+(10000015, 15);
 
 -- Enrollment schema
 -- create table Enrollment
