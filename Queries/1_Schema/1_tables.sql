@@ -20,7 +20,8 @@ DROP TABLE IF EXISTS Person;
 -- Person
 CREATE TABLE Person
 (
-    person_id numeric(8,0) constraint Person_PK primary key
+    person_id numeric(8,0) identity(10000000, 1) 
+        constraint Person_PK primary key
         constraint Person_CHK_ID
       CHECK (person_id > 9999999),
     email VARCHAR(50)
@@ -52,8 +53,10 @@ create table Teacher
 -- Study Program
 CREATE TABLE Program
 (
-    program_id numeric(8,0)
-        constraint Program_PK primary key,
+    program_id numeric(4,0)
+        constraint Program_PK primary key 
+        constraint Program_CHK_ID
+      CHECK (program_id >= 100),
     name VARCHAR(50) NOT NULL,
     duration_years numeric(1,0) not null
         constraint Program_CHK_Duration
@@ -70,7 +73,7 @@ create table Student
       references Person(person_id)
       on update no action
       on delete no action, -- Person entity can never be deleted (a student can come back to school after some time)
-    program_id numeric(8,0)
+    program_id numeric(4,0)
         constraint Student_FK_Program
       references Program(program_id)
       on update no action
@@ -103,9 +106,9 @@ create table Course
       check (credits>0), -- Credits are always positive number
     language VARCHAR(20),
     description VARCHAR(255),
-    semester numeric(1,0) not null -- 0 is Winter Semester, 1 is Summer Semester
+    semester numeric(1,0) not null -- 0 is Winter Semester, 1 is Summer Semester, 2 is Both
         constraint Course_CHK_Semester
-      check (semester>=0 and semester<=1),
+      check (semester>=0 and semester<=2),
     garant_id numeric(8,0) -- One and only one garant per course (or null for archived courses)
         constraint Course_FK_Garant
       references Teacher(teacher_id)

@@ -10,8 +10,8 @@
 DROP TRIGGER IF EXISTS tr_Validate_Course_Capacity;
 DROP TRIGGER IF EXISTS tr_Check_Graduation_Date;
 DROP TRIGGER IF EXISTS tr_Update_Study_Year;
-DROP TRIGGER IF EXISTS tr_CheckProgramDuration;
-DROP TRIGGER IF EXISTS tr_UpdateStudentGPA;
+DROP TRIGGER IF EXISTS tr_Check_Program_Duration;
+GO
 
 -- This trigger checks if a course's capacity is exceeded when enrolling a new student. If so, it cancels the enrollment.
 CREATE OR ALTER TRIGGER tr_Validate_Course_Capacity
@@ -36,6 +36,7 @@ BEGIN
         ROLLBACK TRANSACTION; -- Rollback the insert
     END
 END;
+GO
 
 -- This trigger validates that the graduation date of a student is not earlier than their admission date.
 CREATE OR ALTER TRIGGER tr_Check_Graduation_Date
@@ -49,6 +50,7 @@ BEGIN
         ROLLBACK TRANSACTION;
     END
 END;
+GO
 
 -- This trigger updates the study_year of each student after a certain period. For example, it can increase the study_year every academic year.
 CREATE OR ALTER TRIGGER tr_Update_Study_Year
@@ -60,9 +62,10 @@ BEGIN
     SET study_year = study_year + 1
     WHERE YEAR(getdate()) - YEAR(admission_date) > study_year;
 END;
+GO
 
 -- This trigger ensures a student's study_year does not exceed the program duration when updating the Student table.
-CREATE OR ALTER TRIGGER tr_CheckProgramDuration
+CREATE OR ALTER TRIGGER tr_Check_Program_Duration
 ON Student
 AFTER INSERT, UPDATE
 AS
@@ -75,28 +78,9 @@ BEGIN
         WHERE i.study_year > p.duration_years
     )
     BEGIN
+        RAISERROR ('The study year cannot exceed the duration of the program.', 16, 1);
         -- Rollback the transaction and raise an error
         ROLLBACK TRANSACTION;
-        RAISERROR ('The study year cannot exceed the duration of the program.', 16, 1);
     END
 END;
-
--- This trigger updates the GPA of a student after a certain enrollment of his is updated.
-CREATE OR ALTER TRIGGER tr_UpdateStudentGPA
-ON Enrollment
-AFTER UPDATE
-AS
-BEGIN
-    DECLARE @student_id numeric(8,0);
-    DECLARE @gpa decimal(3,2);
-    
-    SELECT @student_id = student_id FROM inserted;
-
-    -- Compute the GPA
-    SET @gpa = u45389618.fn_CalculateStudentGPA(@student_id);
-
-    -- Update the GPA in the Student table
-    UPDATE Student
-    SET gpa = @gpa
-    WHERE student_id = @student_id;
-END;
+GO

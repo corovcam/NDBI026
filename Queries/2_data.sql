@@ -6,70 +6,68 @@
 -- Description
 -- This script loads sample data into the Student Information System.
 
--- Person
-INSERT INTO Person (person_id, email, name, surname)
+INSERT INTO Person (email, name, surname)
 VALUES 
-(10000001, 'jdoe@example.com', 'John', 'Doe'),
-(10000002, 'mdoe@example.com', 'Mary', 'Doe'),
-(10000003, 'jsmith@example.com', 'Jane', 'Smith'),
-(10000004, 'rjones@example.com', 'Robert', 'Jones'),
-(10000005, 'lsmith@example.com', 'Laura', 'Smith'),
-(10000006, 'jthompson@example.com', 'Jack', 'Thompson'),
-(10000007, 'awhite@example.com', 'Alice', 'White'),
-(10000008, 'mjohnson@example.com', 'Mike', 'Johnson'),
-(10000009, 'lsabina@example.com', 'Linda', 'Sabina'),
-(10000010,'sed@icloud.com','Adena','Figueroa'),
-(10000011,'diam.at@icloud.edu','Orlando','Collins'),
-(10000012,'ut@outlook.net','Reese','Robertson'),
-(10000013,'ullamcorper.duis@aol.com','Medge','Cabrera'),
-(10000014,'a@aol.edu','Dominique','Matthews'),
-(10000015,'quis.pede.suspendisse@icloud.net','Hamilton','Daniel'),
-(10000016,'massa@google.com','Cadman','Black'),
-(10000017,'in.lobortis@aol.ca','Lani','Heath'),
-(10000018,'enim@outlook.org','Adena','Barrett'),
-(10000019,'morbi@outlook.ca','Medge','Roberts'),
-(10000020,'pede.malesuada.vel@outlook.ca','Simone','Huffman'),
-(10000021,'ac@protonmail.edu','Rafael','Frederick'),
-(10000022,'gravida.praesent@hotmail.couk','Bruce','Prince'),
-(10000023,'lacus.etiam@icloud.net','Beau','Burt'),
-(10000024,'semper@google.edu','Eleanor','Carrillo'),
-(10000025,'lacus.etiam@outlook.org','Wayne','Townsend'),
-(10000026,'dolor.donec.fringilla@icloud.edu','Andrew','Wood'),
-(10000027,'massa.mauris.vestibulum@google.edu','Violet','Becker'),
-(10000028,'nascetur.ridiculus@aol.edu','Octavius','Holland'),
-(10000029,'aenean.gravida@google.org','Zeph','Simon'),
-(10000030,'non.sapien@hotmail.ca','Adena','Vega'),
-(10000031,'mi.felis@hotmail.net','Gabriel','Jenkins'),
-(10000032,'sodales.elit@aol.com','Ciaran','Vance'),
-(10000033,'ut.lacus@google.com','Hayley','Bradford'),
-(10000034,'vestibulum.ante@google.net','Galvin','Hebert'),
-(10000035,'tristique.pellentesque@google.couk','Damon','Dillard'),
-(10000036,'tellus.imperdiet.non@hotmail.net','Charity','Owens'),
-(10000037,'velit@protonmail.couk','Luke','Reyes'),
-(10000038,'a.dui@aol.ca','Oliver','Baird'),
-(10000039,'torquent.per.conubia@outlook.ca','Bryar','Gutierrez'),
-(10000040,'amet.lorem@yahoo.com','Beau','Conner'),
-(10000041,'ac.metus@yahoo.couk','Dexter','Ferguson'),
-(10000042,'ipsum@google.com','Cooper','Wilkerson'),
-(10000043,'est.mauris@aol.org','Melinda','Camacho'),
-(10000044,'mauris.molestie@icloud.ca','Molly','Lancaster'),
-(10000045,'aptent@aol.edu','Stone','Webster'),
-(10000046,'dui.quis.accumsan@aol.com','Hedy','Gallegos'),
-(10000047,'ut.pharetra@hotmail.edu','Fletcher','Holmes'),
-(10000048,'pede.nunc@icloud.com','Summer','Shepherd'),
-(10000049,'donec.at.arcu@hotmail.edu','Piper','Winters'),
-(10000050,'accumsan.laoreet.ipsum@outlook.couk','Sebastian','Mcdonald'),
-(10000051,'sem.eget@outlook.edu','Kaye','Salas'),
-(10000052,'rutrum.fusce@google.ca','Callie','Christian'),
-(10000053,'a.malesuada@aol.couk','Janna','Swanson'),
-(10000054,'donec.elementum.lorem@icloud.edu','Stephanie','Johns'),
-(10000055,'venenatis.a@outlook.edu','Barrett','Foreman'),
-(10000056,'vehicula.et.rutrum@hotmail.com','Lev','Myers'),
-(10000057,'nibh.vulputate@google.edu','Camden','Olson'),
-(10000058,'elit.fermentum.risus@icloud.net','Fritz','Oneal'),
-(10000059,'id.ante@protonmail.net','Vance','Mendoza');
+('jdoe@example.com', 'John', 'Doe'),
+('mdoe@example.com', 'Mary', 'Doe'),
+('jsmith@example.com', 'Jane', 'Smith'),
+('rjones@example.com', 'Robert', 'Jones'),
+('lsmith@example.com', 'Laura', 'Smith'),
+('jthompson@example.com', 'Jack', 'Thompson'),
+('awhite@example.com', 'Alice', 'White'),
+('mjohnson@example.com', 'Mike', 'Johnson'),
+('lsabina@example.com', 'Linda', 'Sabina'),
+('sed@icloud.com','Adena','Figueroa'),
+('diam.at@icloud.edu','Orlando','Collins'),
+('ut@outlook.net','Reese','Robertson'),
+('ullamcorper.duis@aol.com','Medge','Cabrera'),
+('a@aol.edu','Dominique','Matthews'),
+('quis.pede.suspendisse@icloud.net','Hamilton','Daniel'),
+('massa@google.com','Cadman','Black'),
+('in.lobortis@aol.ca','Lani','Heath'),
+('enim@outlook.org','Adena','Barrett'),
+('morbi@outlook.ca','Medge','Roberts'),
+('pede.malesuada.vel@outlook.ca','Simone','Huffman'),
+('ac@protonmail.edu','Rafael','Frederick'),
+('gravida.praesent@hotmail.couk','Bruce','Prince'),
+('lacus.etiam@icloud.net','Beau','Burt'),
+('semper@google.edu','Eleanor','Carrillo'),
+('lacus.etiam@outlook.org','Wayne','Townsend'),
+('dolor.donec.fringilla@icloud.edu','Andrew','Wood'),
+('massa.mauris.vestibulum@google.edu','Violet','Becker'),
+('nascetur.ridiculus@aol.edu','Octavius','Holland'),
+('aenean.gravida@google.org','Zeph','Simon'),
+('non.sapien@hotmail.ca','Adena','Vega'),
+('mi.felis@hotmail.net','Gabriel','Jenkins'),
+('sodales.elit@aol.com','Ciaran','Vance'),
+('ut.lacus@google.com','Hayley','Bradford'),
+('vestibulum.ante@google.net','Galvin','Hebert'),
+('tristique.pellentesque@google.couk','Damon','Dillard'),
+('tellus.imperdiet.non@hotmail.net','Charity','Owens'),
+('velit@protonmail.couk','Luke','Reyes'),
+('a.dui@aol.ca','Oliver','Baird'),
+('torquent.per.conubia@outlook.ca','Bryar','Gutierrez'),
+('amet.lorem@yahoo.com','Beau','Conner'),
+('ac.metus@yahoo.couk','Dexter','Ferguson'),
+('ipsum@google.com','Cooper','Wilkerson'),
+('est.mauris@aol.org','Melinda','Camacho'),
+('mauris.molestie@icloud.ca','Molly','Lancaster'),
+('aptent@aol.edu','Stone','Webster'),
+('dui.quis.accumsan@aol.com','Hedy','Gallegos'),
+('ut.pharetra@hotmail.edu','Fletcher','Holmes'),
+('pede.nunc@icloud.com','Summer','Shepherd'),
+('donec.at.arcu@hotmail.edu','Piper','Winters'),
+('accumsan.laoreet.ipsum@outlook.couk','Sebastian','Mcdonald'),
+('sem.eget@outlook.edu','Kaye','Salas'),
+('rutrum.fusce@google.ca','Callie','Christian'),
+('a.malesuada@aol.couk','Janna','Swanson'),
+('donec.elementum.lorem@icloud.edu','Stephanie','Johns'),
+('venenatis.a@outlook.edu','Barrett','Foreman'),
+('vehicula.et.rutrum@hotmail.com','Lev','Myers'),
+('nibh.vulputate@google.edu','Camden','Olson'),
+('elit.fermentum.risus@icloud.net','Fritz','Oneal'),
+('id.ante@protonmail.net','Vance','Mendoza');
 
--- Teacher
 INSERT INTO Teacher (teacher_id, degree, phone_number, website, office)
 VALUES
 (10000001, 'PhD', '555-123-4567', 'www.example.com/jdoe', 'Room 1A'),
@@ -94,93 +92,62 @@ VALUES
 (10000024, 'MSc', '555-123-4588', 'www.example.com/white', 'Room 22V'),
 (10000025, 'PhD', '555-123-4589', 'www.example.com/harris', 'Room 23W');
 
--- Program
 INSERT INTO Program (program_id, name, duration_years)
 VALUES
-(1, 'Medicine', 6),
-(2, 'Law', 5),
-(3, 'History', 3),
-(4, 'Biology', 3),
-(5, 'Chemistry', 3),
-(6, 'Physics', 3),
-(7, 'Mathematics', 3),
-(8, 'Informatics', 3),
-(9, 'Economics', 3),
-(10, 'Pharmacy', 5),
-(11, 'Education', 3),
-(12, 'Physical Education', 3),
-(13, 'Sport', 3),
-(14, 'Economics', 3),
-(15, 'Business Administration', 3);
+(101, 'Medicine', 6),
+(102, 'Law', 5),
+(103, 'History', 3),
+(104, 'Biology', 3),
+(105, 'Chemistry', 3),
+(106, 'Physics', 3),
+(107, 'Mathematics', 3),
+(108, 'Informatics', 3),
+(109, 'Economics', 3),
+(110, 'Pharmacy', 5),
+(111, 'Education', 3),
+(112, 'Physical Education', 3),
+(113, 'Sport', 3),
+(114, 'Psychology', 3),
+(115, 'Business Administration', 3);
 
--- Student schema
--- create table Student
--- (
---     student_id numeric(8,0)
---         constraint Student_PK
---       primary key
---         constraint Student_FK_Person
---       references Person(person_id)
---       on update no action
---       on delete cascade,
---     program_id numeric(8,0)
---         constraint Student_FK_Program
---       references Program(program_id)
---       on update no action
---       on delete set null,
---     study_year numeric(1,0) not null
---         constraint Student_CHK_StudyYear
---       check (study_year>0),
---     admission_date DATE NOT NULL,
---     graduation_date DATE,
---     gpa decimal(4,2)
---         constraint Student_CHK_GPA
---       check (gpa>=1 and gpa<=3),
---     status VARCHAR(20) not null
---         constraint Student_CHK_Status
---       check (status IN ('active', 'graduated', 'suspended', 'expelled')),
---     honor_status VARCHAR(20)
---         constraint Student_CHK_HonorStatus
---       check (honor_status IN ('Honored', 'Good standing', 'Passing'))
--- );
 INSERT INTO Student (student_id, program_id, study_year, admission_date, graduation_date, gpa, status, honor_status)
 VALUES
-(10000003, 1, 1, '2022-09-01', NULL, NULL, 'active', NULL),
-(10000004, 2, 1, '2022-09-01', NULL, NULL, 'active', NULL),
-(10000007, 3, 1, '2022-09-01', NULL, NULL, 'active', NULL),
-(10000008, 4, 1, '2022-09-01', NULL, NULL, 'active', NULL),
-(10000026, 7, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000027, 8, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000028, 9, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000029, 10, 2, '2021-09-01', NULL, NULL, 'expelled', NULL),
-(10000030, 11, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000031, 12, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000032, 13, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000033, 14, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000034, 15, 2, '2021-09-01', NULL, NULL, 'active', NULL),
-(10000035, 1, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000036, 2, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000037, 3, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000038, 4, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000039, 5, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000040, 6, 3, '2020-09-01', NULL, NULL, 'suspended', NULL),
-(10000041, 7, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000042, 8, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000043, 9, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000044, 10, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000045, 11, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000046, 12, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000047, 13, 3, '2020-09-01', NULL, NULL, 'expelled', NULL),
-(10000048, 14, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000049, 15, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000050, 1, 4, '2019-09-01', NULL, NULL, 'active', NULL),
-(10000051, 2, 4, '2019-09-01', NULL, NULL, 'active', NULL),
-(10000052, 3, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000053, 4, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000054, 5, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000055, 6, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000056, 7, 3, '2020-09-01', NULL, NULL, 'active', NULL),
-(10000057, 8, 3, '2020-09-01', NULL, NULL, 'active', NULL);
+(10000003, 101, 1, '2022-09-01', NULL, NULL, 'active', NULL),
+(10000004, 102, 1, '2022-09-01', NULL, NULL, 'active', NULL),
+(10000007, 103, 1, '2022-09-01', NULL, NULL, 'active', NULL),
+(10000008, 104, 1, '2022-09-01', NULL, NULL, 'active', NULL),
+(10000026, 107, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000027, 108, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000028, 109, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000029, 110, 2, '2021-09-01', NULL, NULL, 'expelled', NULL),
+(10000030, 111, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000031, 112, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000032, 113, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000033, 114, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000034, 115, 2, '2021-09-01', NULL, NULL, 'active', NULL),
+(10000035, 101, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000036, 102, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000037, 103, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000038, 104, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000039, 105, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000040, 106, 3, '2020-09-01', NULL, NULL, 'suspended', NULL),
+(10000041, 107, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000042, 108, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000043, 109, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000044, 110, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000045, 111, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000046, 112, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000047, 113, 3, '2020-09-01', NULL, NULL, 'expelled', NULL),
+(10000048, 114, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000049, 115, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000050, 101, 4, '2019-09-01', NULL, NULL, 'active', NULL),
+(10000051, 102, 4, '2019-09-01', NULL, NULL, 'active', NULL),
+(10000052, 103, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000053, 104, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000054, 105, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000055, 106, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000056, 107, 3, '2020-09-01', NULL, NULL, 'active', NULL),
+(10000057, 108, 3, '2020-09-01', NULL, NULL, 'active', NULL);
 
 INSERT INTO Course (course_id, name, credits, language, description, semester, garant_id, max_capacity)
 VALUES
@@ -200,21 +167,6 @@ VALUES
 (14, 'Introduction to Sociology', 3, 'English', 'Introduction to sociology', 0, 10000014, 30),
 (15, 'Introduction to Philosophy', 5, 'English', 'Introduction to philosophy', 1, 10000015, 30);
 
--- Teaches (many-to-many relationship between Teacher and Course) schema
--- create table Teaches
--- (
---     teacher_id numeric(8,0)
---         constraint Teaches_FK_Teacher
---       references Teacher(teacher_id)
---       on update no action
---       on delete no action, -- keep Teaches even if teacher (with certain ID) is deleted (for historical purposes or if teacher comes back)
---     course_id numeric(8,0)
---         constraint Teaches_FK_Course
---       references Course(course_id)
---       on update no action
---       on delete cascade, -- If a course is deleted, the historical data is irrelevant
---     primary key (teacher_id, course_id) -- Teacher can teach one course multiple times
--- );
 INSERT INTO Teaches (teacher_id, course_id)
 VALUES
 (10000001, 1),
@@ -233,25 +185,6 @@ VALUES
 (10000014, 14),
 (10000015, 15);
 
--- Enrollment schema
--- create table Enrollment
--- (
---     student_id numeric(8,0)
---         constraint Enrollment_FK_Student
---       references Student(student_id)
---       on update no action
---       on delete set null, -- keep enrollment even if student is deleted (for historical purposes)
---     course_id numeric(8,0)
---         constraint Enrollment_FK_Course
---       references Course(course_id)
---       on update no action
---       on delete no action,
---     enrollment_date DATE NOT NULL,
---     grade numeric(1,0)
---         constraint Enrollment_CHK_Grade
---       check (grade>=1 and grade<=4), -- 1 is A, 2 is B, 3 is C, 4 is F (failed)
---     primary key (student_id, course_id, enrollment_date) -- Enrollment is unique per student, course and date
--- );
 INSERT INTO Enrollment (student_id, course_id, enrollment_date, grade)
 VALUES
 (10000003, 1, '2022-09-01', NULL),
@@ -365,22 +298,6 @@ VALUES
 (10000029, 4, '2022-09-01', NULL),
 (10000029, 5, '2022-09-01', NULL);
 
--- Course_Schedule
--- CREATE TABLE Course_Schedule
--- (
---     course_id numeric(8,0)
---         constraint Course_Schedule_FK_Course
---       references Course(course_id)
---       on update no action
---       on delete cascade,
---     start_time TIME NOT NULL,
---     end_time TIME NOT NULL,
---     day_of_week numeric(1,0) NOT NULL -- 0 is Monday, 1 is Tuesday, ..., 6 is Sunday
---         constraint Course_Schedule_CHK_DayOfWeek
---       check (day_of_week>=0 and day_of_week<=6),
---     location VARCHAR(50), -- Location is optional; room number, building, etc.
---     primary key (course_id, start_time, end_time)
--- );
 INSERT INTO Course_Schedule (course_id, start_time, end_time, day_of_week, location)
 VALUES
 (1, '08:00:00', '09:30:00', 0, 'Room 1A'),
