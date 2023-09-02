@@ -18,6 +18,9 @@ DROP TABLE IF EXISTS Teacher;
 DROP TABLE IF EXISTS Person;
 
 -- Person
+-- Person entity always persists in the database. If a Teacher/Student/(any other future role) is deleted from the database 
+-- via application layer, the Person entity serves as a placeholder if the Person decides to change its role in the future.
+-- The only exception could be if the entity explicitly requests data deletion (GDPR), or in case of a data loss.
 CREATE TABLE Person
 (
     person_id numeric(8,0) identity(10000000, 1) 
@@ -35,6 +38,8 @@ CREATE TABLE Person
 );
 
 -- Teacher
+-- Teacher is a Person with additional attributes. Teacher can be a Student as well.
+-- Teacher can be deleted from the database if he/she is no longer employed by the school (as a teacher).
 create table Teacher
 (
     teacher_id numeric(8,0)
@@ -65,6 +70,8 @@ CREATE TABLE Program
 );
 
 -- Student
+-- Student is a Person with additional attributes. Student can be a Teacher as well.
+-- Student can be deleted from the database if he/she is no longer enrolled in the school.
 create table Student
 (
     student_id numeric(8,0)
@@ -77,8 +84,8 @@ create table Student
     program_id numeric(4,0)
         constraint Student_FK_Program
       references Program(program_id)
-      on update no action
-      on delete set null,
+      on update cascade -- Program ID can be changed in the future
+      on delete set null, -- A student can change his/her program or be suspended/expelled from the school, or be inbetween programs
     study_year numeric(1,0) not null
         constraint Student_CHK_StudyYear
       check (study_year>0),
@@ -127,13 +134,13 @@ create table Teaches
         constraint Teaches_FK_Teacher
       references Teacher(teacher_id)
       on update no action
-      on delete no action, -- keep Teaches even if teacher (with certain ID) is deleted (for historical purposes or if teacher comes back)
+      on delete cascade, -- Teaches (current courses taught by a teacher) are deleted if a teacher is deleted (no historical data because these are current courses for this semester)
     course_id numeric(8,0)
         constraint Teaches_FK_Course
       references Course(course_id)
       on update no action
       on delete cascade, -- If a course is deleted, the historical data is irrelevant
-    primary key (teacher_id, course_id) -- Teacher can teach one course multiple times
+    primary key (teacher_id, course_id) -- Teacher can teach multiple Courses
 );
 
 -- Enrollments (many-to-many relationship between Student and Course)
@@ -143,12 +150,12 @@ create table Enrollment
         constraint Enrollment_FK_Student
       references Student(student_id)
       on update no action
-      on delete no action, -- keep enrollment (for historical purposes or if student comes back)
+      on delete cascade, -- If a student is deleted, the historical enrollments are not persisted
     course_id numeric(8,0)
         constraint Enrollment_FK_Course
       references Course(course_id)
       on update no action
-      on delete no action, -- keep enrollment (for historical purposes, gpa calculation, etc.)
+      on delete cascade, -- If a course is deleted, Student is no longer enrolled in it (has to enroll again in the future)
     enrollment_date DATE NOT NULL,
     grade numeric(1,0)
         constraint Enrollment_CHK_Grade
@@ -163,7 +170,7 @@ CREATE TABLE Course_Schedule
         constraint Course_Schedule_FK_Course
       references Course(course_id)
       on update no action
-      on delete cascade,
+      on delete cascade, -- Course_Schedule without a Course is useless
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
     day_of_week numeric(1,0) NOT NULL -- 0 is Monday, 1 is Tuesday, ..., 6 is Sunday
