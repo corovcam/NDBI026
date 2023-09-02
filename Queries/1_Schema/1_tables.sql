@@ -57,7 +57,8 @@ CREATE TABLE Program
         constraint Program_PK primary key 
         constraint Program_CHK_ID
       CHECK (program_id >= 100),
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL
+        constraint Program_Unique_Name unique,
     duration_years numeric(1,0) not null
         constraint Program_CHK_Duration
       check (duration_years>=1)

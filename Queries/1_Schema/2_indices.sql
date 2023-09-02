@@ -25,7 +25,3 @@ CREATE INDEX idx_Course_Schedule_CourseId ON Course_Schedule (course_id);
 -- sp_EnrollStudentInCourse:
 -- This procedure involves inserting data into the Enrollment table based on student_id and course_id. Indexes on these columns will help speed up the insert and improve query performance.
 CREATE INDEX idx_Enrollment_StudentCourse ON Enrollment (student_id, course_id);
-
--- sp_AddProgram:
--- This procedure inserts data into the Program table. An index on the name column will help with the duplicate check.
-CREATE UNIQUE INDEX idx_Program_Name ON Program (name);
