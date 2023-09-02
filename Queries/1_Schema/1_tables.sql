@@ -177,5 +177,5 @@ CREATE TABLE Course_Schedule
         constraint Course_Schedule_CHK_DayOfWeek
       check (day_of_week>=0 and day_of_week<=6),
     location VARCHAR(50), -- Location is optional; room number, building, etc.
-    primary key (course_id, start_time, end_time, day_of_week)
+    primary key (course_id, day_of_week, start_time, end_time)
 );
